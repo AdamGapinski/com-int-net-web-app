@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import GridList from '@material-ui/core/GridList';
-import RecipeReviewCard from "./RecipeReviewCard";
+import PostsList from "./PostsList";
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -14,29 +13,22 @@ const styles = theme => ({
     }),
 });
 
-function PaperSheet(props) {
+function PostsSheet(props) {
     const { classes } = props;
     return (
         <div>
             <Paper className={classes.root} elevation={4}>
                 <Typography variant="headline" component="h3">
-                    This is a sheet of paper.
+                    Posts
                 </Typography>
-                <GridList>
-                    <RecipeReviewCard />
-                    <RecipeReviewCard />
-                    <RecipeReviewCard />
-                    <RecipeReviewCard />
-                    <RecipeReviewCard />
-                    <RecipeReviewCard />
-                </GridList>
+                <PostsList />
             </Paper>
         </div>
     );
 }
 
-PaperSheet.propTypes = {
+PostsSheet.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(PostsSheet);

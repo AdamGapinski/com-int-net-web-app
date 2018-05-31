@@ -43,8 +43,11 @@ const styles = theme => ({
     },
 });
 
-class RecipeReviewCard extends React.Component {
-    state = { expanded: false };
+class PostCard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { expanded: false };
+    }
 
     handleExpandClick = () => {
         this.setState({ expanded: !this.state.expanded });
@@ -77,8 +80,7 @@ class RecipeReviewCard extends React.Component {
                     />
                     <CardContent>
                         <Typography component="p">
-                            This impressive paella is a perfect party dish and a fun meal to cook together with
-                            your guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                            {this.props.post.contents}
                         </Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
@@ -134,8 +136,8 @@ class RecipeReviewCard extends React.Component {
     }
 }
 
-RecipeReviewCard.propTypes = {
+PostCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(PostCard);

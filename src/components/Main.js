@@ -1,6 +1,6 @@
 import React from "react";
 import ChipsArray from "./ChipsArray";
-import HomeSheet from "./HomeSheet";
+import PostsSheet from "./PostsSheet";
 import Button from "@material-ui/core/Button/Button";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddIcon from "@material-ui/icons/Add";
@@ -15,7 +15,7 @@ class Main extends React.Component {
             <main className={this.props.classes.content}>
                 <div className={this.props.classes.toolbar}/>
                 <ChipsArray/>
-                <HomeSheet/>
+                <PostsSheet/>
                 <Button variant="fab" color="primary" aria-label="add" className={this.props.classes.button}>
                     <AddIcon/>
                 </Button>
