@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Main from "./Main";
+import MainPanel from "./MainPanel";
 import LeftPanel from "./LeftPanel";
 import Header from "./Header";
 
@@ -31,6 +31,10 @@ const styles = theme => ({
     toolbar: theme.mixins.toolbar,
     button: {
         margin: theme.spacing.unit,
+    },
+    addPostButton: {
+        margin: theme.spacing.unit,
+        zIndex: theme.zIndex.drawer + 1,
     },
     search: {
         width: theme.spacing.unit * 9,
@@ -66,7 +70,7 @@ function App(props) {
         <div className={classes.root}>
             <Header classes={classes} />
             <LeftPanel classes={classes} />
-            <Main classes={classes} />
+            <MainPanel classes={classes} />
         </div>
     );
 }
