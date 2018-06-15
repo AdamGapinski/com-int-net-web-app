@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
@@ -23,11 +21,11 @@ const styles = theme => ({
 class ChipsArray extends React.Component {
     state = {
         chipData: [
-            { key: 0, label: 'Angular' },
-            { key: 1, label: 'jQuery' },
-            { key: 2, label: 'Polymer' },
-            { key: 3, label: 'React' },
-            { key: 4, label: 'Vue.js' },
+            {key: 0, label: 'Angular'},
+            {key: 1, label: 'jQuery'},
+            {key: 2, label: 'Polymer'},
+            {key: 3, label: 'React'},
+            {key: 4, label: 'Vue.js'},
         ],
     };
 
@@ -40,11 +38,11 @@ class ChipsArray extends React.Component {
         const chipData = [...this.state.chipData];
         const chipToDelete = chipData.indexOf(data);
         chipData.splice(chipToDelete, 1);
-        this.setState({ chipData });
+        this.setState({chipData});
     };
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         return (
             <Paper className={classes.root}>
@@ -54,7 +52,7 @@ class ChipsArray extends React.Component {
                     if (data.label === 'React') {
                         avatar = (
                             <Avatar>
-                                <TagFacesIcon className={classes.svgIcon} />
+                                <TagFacesIcon className={classes.svgIcon}/>
                             </Avatar>
                         );
                     }

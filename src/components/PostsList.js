@@ -11,26 +11,28 @@ class PostsList extends React.Component {
         }
     }
 
-    componentDidMount() {
-        PostsList.fetchPosts().then(fetched => {
-            this.setState({
-                posts: fetched
-            });
-        });
-    }
-
     static fetchPosts() {
         return fetch("http://localhost:8080/posts")
             .then(r => r.json())
             .catch(error => console.error('Error:', error));
     }
 
+    componentDidMount() {
+        this.props.fetchPosts().then(fetched => {
+            this.setState({
+                posts: fetched
+            });
+        });
+    }
+
     render() {
-        const posts = [];
-        this.state.posts.forEach(post => posts.push(<PostCard key={post.id} post={post} />));
+        const postCards = [];
+        if (this.state.posts && Array.isArray(this.state.posts)) {
+            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}/>));
+        }
         return (
             <GridList>
-                {posts}
+                {postCards}
             </GridList>
         );
     }

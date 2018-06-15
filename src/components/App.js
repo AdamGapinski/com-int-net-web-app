@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import MainPanel from "./MainPanel";
-import LeftPanel from "./LeftPanel";
-import Header from "./Header";
+import Home from "./Home";
 
 const drawerWidth = 240;
 
@@ -64,14 +62,10 @@ const styles = theme => ({
 });
 
 function App(props) {
-    const { classes } = props;
+    const {classes} = props;
 
     return (
-        <div className={classes.root}>
-            <Header classes={classes} />
-            <LeftPanel classes={classes} />
-            <MainPanel classes={classes} />
-        </div>
+        <Home classes={classes}/>
     );
 }
 

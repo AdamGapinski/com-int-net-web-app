@@ -16,44 +16,44 @@ class LeftPanel extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <Drawer
                 variant="permanent"
                 classes={{
                     paper: this.props.classes.drawerPaper,
                 }}
             >
-                <div className={this.props.classes.toolbar} />
+                <div className={this.props.classes.toolbar}/>
                 <List>
                     <ListItem button>
                         <ListItemIcon>
-                            <HomeIcon />
+                            <HomeIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Home" />
+                        <ListItemText primary="Home"/>
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>
-                            <GroupIcon />
+                            <GroupIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Groups" />
+                        <ListItemText primary="Groups"/>
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>
-                            <WebIcon />
+                            <WebIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Recommended" />
+                        <ListItemText primary="Recommended"/>
                     </ListItem>
                 </List>
-                <Divider />
+                <Divider/>
                 <List>
                     <ListItem button>
                         <ListItemIcon>
-                            <SubscriptionsIcon />
+                            <SubscriptionsIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Subscriptions" />
+                        <ListItemText primary="Subscriptions"/>
                     </ListItem>
                 </List>
-                <Divider />
+                <Divider/>
             </Drawer>
         );
     }

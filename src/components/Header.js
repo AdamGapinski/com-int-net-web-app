@@ -10,7 +10,7 @@ class Header extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <AppBar position="absolute" className={this.props.classes.appBar}>
                 <Toolbar>
                     <Typography variant="title" color="inherit" noWrap>
@@ -18,9 +18,9 @@ class Header extends React.Component {
                     </Typography>
                     <div className={this.props.classes.root}>
                         <div className={this.props.classes.search}>
-                            <SearchIcon />
+                            <SearchIcon/>
                         </div>
-                        <input id="docsearch-input" className={this.props.classes.input} />
+                        <input id="docsearch-input" className={this.props.classes.input}/>
                     </div>
                 </Toolbar>
             </AppBar>

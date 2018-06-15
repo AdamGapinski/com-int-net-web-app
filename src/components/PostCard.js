@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -44,17 +44,17 @@ const styles = theme => ({
 });
 
 class PostCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { expanded: false };
-    }
-
     handleExpandClick = () => {
-        this.setState({ expanded: !this.state.expanded });
+        this.setState({expanded: !this.state.expanded});
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {expanded: false};
+    }
+
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         return (
             <div>
@@ -67,7 +67,7 @@ class PostCard extends React.Component {
                         }
                         action={
                             <IconButton>
-                                <MoreVertIcon />
+                                <MoreVertIcon/>
                             </IconButton>
                         }
                         title="Shrimp and Chorizo Paella"
@@ -85,10 +85,10 @@ class PostCard extends React.Component {
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
                         <IconButton aria-label="Add to favorites">
-                            <FavoriteIcon />
+                            <FavoriteIcon/>
                         </IconButton>
                         <IconButton aria-label="Share">
-                            <ShareIcon />
+                            <ShareIcon/>
                         </IconButton>
                         <IconButton
                             className={classnames(classes.expand, {
@@ -98,7 +98,7 @@ class PostCard extends React.Component {
                             aria-expanded={this.state.expanded}
                             aria-label="Show more"
                         >
-                            <ExpandMoreIcon />
+                            <ExpandMoreIcon/>
                         </IconButton>
                     </CardActions>
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

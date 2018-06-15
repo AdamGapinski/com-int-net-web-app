@@ -14,14 +14,14 @@ const styles = theme => ({
 });
 
 function PostsSheet(props) {
-    const { classes } = props;
+    const {classes} = props;
     return (
         <div>
             <Paper className={classes.root} elevation={4}>
                 <Typography variant="headline" component="h3">
                     Posts
                 </Typography>
-                <PostsList />
+                <PostsList fetchPosts={props.fetchPosts}/>
             </Paper>
         </div>
     );

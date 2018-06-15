@@ -13,7 +13,7 @@ class MainPanel extends React.Component {
             <main className={this.props.classes.content}>
                 <div className={this.props.classes.toolbar}/>
                 <ChipsArray/>
-                <PostsSheet/>
+                <PostsSheet fetchPosts={this.props.fetchPosts}/>
                 <AddPostButton classes={this.props.classes}/>
             </main>
         );

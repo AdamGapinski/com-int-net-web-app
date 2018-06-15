@@ -4,20 +4,19 @@ import Button from '@material-ui/core/Button';
 import AddPostDialog from "./AddPostDialog";
 
 class AddPostButton extends React.Component {
+    handleClickOpen = () => {
+        this.setState({openAddPostDialog: true});
+    };
+    handleClose = () => {
+        this.setState({openAddPostDialog: false});
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             openAddPostDialog: false
         };
     }
-
-    handleClickOpen = () => {
-        this.setState({openAddPostDialog: true});
-    };
-
-    handleClose = () => {
-        this.setState({openAddPostDialog: false});
-    };
 
     render() {
         return (
