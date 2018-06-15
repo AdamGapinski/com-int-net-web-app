@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from "@material-ui/core/Button/Button";
 
 const styles = theme => ({
     container: {
@@ -20,37 +19,6 @@ const styles = theme => ({
 });
 
 class RegisterForm extends React.Component {
-    handleSignUp = () => {
-        let username = document.getElementById("username-input").value;
-        document.getElementById("username-input").value = '';
-        let password = document.getElementById("password-input").value;
-        document.getElementById("password-input").value = '';
-        let password_repeat = document.getElementById("password-repeat-input").value;
-        document.getElementById("password-repeat-input").value = '';
-        if (!username || !password || !password_repeat) {
-            return;
-        }
-        if (password !== password_repeat) {
-            console.log("Passwords does not match.");
-            return;
-        }
-        let hdrs = new Headers();
-        hdrs.append('Content-Type', "application/json");
-        fetch("http://localhost:8080/user/new", {
-            method: "POST",
-            body: JSON.stringify({
-                username: username,
-                password: password
-            }),
-            headers: hdrs
-        })
-            .then(jsonResponse => {
-                console.log(jsonResponse);
-                this.props.onRegistered();
-            })
-            .catch(error => console.error("Error:", error));
-    };
-
     render() {
         const {classes} = this.props;
 
@@ -64,7 +32,7 @@ class RegisterForm extends React.Component {
                 />
                 <TextField
                     id="password-input"
-                    requried
+                    required={true}
                     label="Password"
                     className={classes.textField}
                     type="password"
@@ -73,16 +41,13 @@ class RegisterForm extends React.Component {
                 />
                 <TextField
                     id="password-repeat-input"
-                    requried
+                    required={true}
                     label="Repeat password"
                     className={classes.textField}
                     type="password"
                     autoComplete="current-password"
                     margin="normal"
                 />
-                <Button variant="contained" color="secondary" className={classes.button} onClick={this.handleSignUp}>
-                    Sign up
-                </Button>
             </form>
         );
     }
