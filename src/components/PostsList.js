@@ -11,12 +11,6 @@ class PostsList extends React.Component {
         }
     }
 
-    static fetchPosts() {
-        return fetch("http://localhost:8080/posts")
-            .then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    }
-
     componentDidMount() {
         this.props.fetchPosts().then(fetched => {
             this.setState({
@@ -28,7 +22,8 @@ class PostsList extends React.Component {
     render() {
         const postCards = [];
         if (this.state.posts && Array.isArray(this.state.posts)) {
-            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}/>));
+            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}
+                                                                      fetchComments={this.props.fetchComments}/>));
         }
         return (
             <GridList>

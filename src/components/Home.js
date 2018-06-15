@@ -42,6 +42,16 @@ export default class Home extends React.Component {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
+    fetchComments = (postId) => {
+        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.user.access_token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
     handleSignIn = () => {
         let username = document.getElementById("username-input").value;
         document.getElementById("username-input").value = '';
@@ -111,7 +121,8 @@ export default class Home extends React.Component {
                 <div className={this.props.classes.root}>
                     <Header classes={this.props.classes}/>
                     <LeftPanel classes={this.props.classes}/>
-                    <MainPanel fetchPosts={this.fetchPosts} classes={this.props.classes}/>
+                    <MainPanel fetchPosts={this.fetchPosts} fetchComments={this.fetchComments}
+                               classes={this.props.classes}/>
                 </div>
             );
         } else if (this.state.registration) {
