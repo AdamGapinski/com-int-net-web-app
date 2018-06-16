@@ -16,10 +16,12 @@ class AddPostButton extends React.Component {
     };
     onSuccess = () => {
         this.setState({success: true});
+        this.props.refreshPostList();
     };
     onFailure = () => {
         this.setState({success: false});
     };
+
     constructor(props) {
         super(props);
         this.state = {

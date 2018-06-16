@@ -2,51 +2,51 @@ import GridList from "@material-ui/core/GridList/GridList";
 import React from "react";
 import PostCard from "./PostCard";
 
-class CategoryPosts extends React.Component {
+
+class PostsList extends React.Component {
+    equalsWithFetched = () => {
+        if (this.props.categories.length !== this.state.fetchedCategories.length) {
+            return false;
+        }
+        this.props.categories.forEach(category => {
+            if (!this.state.fetchedCategories.includes(category)) {
+                return false;
+            }
+        });
+        return true;
+    };
+
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            fetchedCategories: []
         }
     }
 
-    componentDidMount() {
-        this.props.api.fetchPostsByCategory(this.props.category).then(fetched => {
-            if (fetched && Array.isArray(fetched)) {
-                this.setState({
-                    posts: fetched.map(post => <PostCard key={post.id} post={post} api={this.props.api}/>)
-                });
-            }
-        });
-    }
-
     render() {
-        const postCards = [];
-        if (this.state.posts && Array.isArray(this.state.posts)) {
-            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}
-                                                                      api={this.props.api}/>));
+        if (this.props.categories.length > 0 &&
+            !this.equalsWithFetched()) {
+            this.props.api.fetchPostsByCategories(this.props.categories).then(fetched => {
+                console.log(fetched);
+                if (fetched && Array.isArray(fetched)) {
+                    this.setState({
+                        posts: fetched.map(post => <PostCard key={post.id} post={post} api={this.props.api}/>),
+                        fetchedCategories: this.props.categories.slice(0)
+                    });
+                }
+            });
+        } else if (this.props.categories.length === 0 &&
+            !this.equalsWithFetched()) {
+            this.setState({
+                posts: [],
+                fetchedCategories: []
+            })
         }
-        return (
-            <div key={this.props.key}>
-                {this.state ? this.state.posts : []}
-            </div>
-        );
-    }
-}
 
-class PostsList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        let posts = [];
-        let key = 0;
-        this.props.categories.forEach(value => posts.push(<CategoryPosts key={key++} api={this.props.api}
-                                                                         category={value}/>));
         return (
             <GridList>
-                {posts}
+                {this.state.posts}
             </GridList>
         );
     }

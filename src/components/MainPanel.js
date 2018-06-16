@@ -14,6 +14,22 @@ class MainPanel extends React.Component {
             categories: categories
         })
     };
+    onPostAdd = () => {
+        window.setTimeout(() => {
+            this.fetchCategorySuggestions();
+            this.refreshPostList();
+        }, 1500)
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            categories: [],
+            suggestions: [],
+            forcePostListRefresh: false
+        }
+    }
+
     fetchCategorySuggestions() {
         this.props.api.fetchCategories().then(fetched => {
             if (fetched && Array.isArray(fetched)) {
@@ -24,23 +40,26 @@ class MainPanel extends React.Component {
             }
         })
     }
-    onPostAdd = () => {
-        window.setTimeout(() => {
-            this.fetchCategorySuggestions();
-        }, 1000)
-    };
+
+    refreshPostList() {
+        this.setState({
+            forcePostListRefresh: true
+        })
+    }
+
     componentDidMount() {
         this.fetchCategorySuggestions();
     }
-    constructor(props) {
-        super(props);
-        this.state = {
-            categories: [],
-            suggestions: []
-        }
-    }
 
     render() {
+        let categories = [];
+        if (this.state.forcePostListRefresh) {
+            this.setState({
+                forcePostListRefresh: false
+            })
+        } else {
+            categories = this.state.categories;
+        }
         return (
             <main className={this.props.classes.content}>
                 <div className={this.props.classes.toolbar}/>
@@ -48,8 +67,12 @@ class MainPanel extends React.Component {
                                 onCategoryAdd={this.onCategoryAdd}
                                 onCategoryDelete={this.onCategoryDelete}
                                 suggestions={this.state.suggestions}/>
-                <PostsSheet api={this.props.api} categories={this.state.categories}/>
-                <AddPostButton api={this.props.api} classes={this.props.classes} onPostAdd={this.onPostAdd}/>
+                <PostsSheet api={this.props.api}
+                            categories={categories}/>
+                <AddPostButton api={this.props.api}
+                               classes={this.props.classes}
+                               onPostAdd={this.onPostAdd}
+                               refreshPostList={this.refreshPostList}/>
             </main>
         );
     }

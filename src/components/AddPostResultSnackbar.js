@@ -5,6 +5,7 @@ class AddPostResultSnackbar extends React.Component {
     handleClose = () => {
         this.setState({open: false});
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +14,7 @@ class AddPostResultSnackbar extends React.Component {
             horizontal: 'right'
         };
     }
+
     render() {
         const {vertical, horizontal, open} = this.state;
         return (

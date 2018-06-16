@@ -26,6 +26,7 @@ export default class AddPostDialog extends React.Component {
             this.props.onPostAdd();
         }
     };
+
     render() {
         return (
             <Dialog

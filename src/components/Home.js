@@ -41,8 +41,8 @@ class Api {
             })
             .catch(error => console.error('Error:', error));
     };
-    fetchPostsByCategory = (categoryName) => {
-        return fetch(`http://localhost:8080/categories/${categoryName}/posts`, {
+    fetchPostsByCategory = (category) => {
+        return fetch(`http://localhost:8080/categories/${category}/posts`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -50,6 +50,20 @@ class Api {
             }
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
+    };
+    fetchPostsByCategories = (categories) => {
+        if (Array.isArray(categories)) {
+            let categoryList = categories.join("3");
+            console.log(`http://localhost:8080/categories/list/${categoryList}/posts`);
+            return fetch(`http://localhost:8080/categories/list/${categoryList}/posts`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + this.token,
+                }
+            }).then(r => r.json())
+                .catch(error => console.error('Error:', error));
+        }
     };
     fetchComments = (postId) => {
         return fetch(`http://localhost:8080/posts/${postId}/comments`, {

@@ -53,14 +53,45 @@ renderSuggestion.propTypes = {
 };
 
 class DownshiftMultiple extends React.Component {
-    constructor(props){
-        super(props)
-    }
-
     state = {
         inputValue: '',
         selectedItem: [],
     };
+    handleKeyDown = event => {
+        const {inputValue, selectedItem} = this.state;
+        if (selectedItem.length && !inputValue.length && keycode(event) === 'backspace') {
+            this.setState({
+                selectedItem: selectedItem.slice(0, selectedItem.length - 1),
+            });
+        }
+    };
+    handleInputChange = event => {
+        this.setState({inputValue: event.target.value});
+    };
+    handleChange = item => {
+        let {selectedItem} = this.state;
+
+        if (selectedItem.indexOf(item) === -1) {
+            selectedItem = [...selectedItem, item];
+        }
+
+        this.setState({
+            inputValue: '',
+            selectedItem,
+        });
+        this.props.onCategoryAdd(selectedItem.slice());
+    };
+    handleDelete = item => () => {
+        const selectedItem = [...this.state.selectedItem];
+        selectedItem.splice(selectedItem.indexOf(item), 1);
+
+        this.setState({selectedItem});
+        this.props.onCategoryDelete(selectedItem.slice());
+    };
+
+    constructor(props) {
+        super(props)
+    }
 
     getSuggestions(inputValue) {
         let count = 0;
@@ -81,41 +112,6 @@ class DownshiftMultiple extends React.Component {
             return keep;
         });
     }
-
-    handleKeyDown = event => {
-        const {inputValue, selectedItem} = this.state;
-        if (selectedItem.length && !inputValue.length && keycode(event) === 'backspace') {
-            this.setState({
-                selectedItem: selectedItem.slice(0, selectedItem.length - 1),
-            });
-        }
-    };
-
-    handleInputChange = event => {
-        this.setState({inputValue: event.target.value});
-    };
-
-    handleChange = item => {
-        let {selectedItem} = this.state;
-
-        if (selectedItem.indexOf(item) === -1) {
-            selectedItem = [...selectedItem, item];
-        }
-
-        this.setState({
-            inputValue: '',
-            selectedItem,
-        });
-        this.props.onCategoryAdd(selectedItem.slice());
-    };
-
-    handleDelete = item => () => {
-        const selectedItem = [...this.state.selectedItem];
-        selectedItem.splice(selectedItem.indexOf(item), 1);
-
-        this.setState({selectedItem});
-        this.props.onCategoryDelete(selectedItem.slice());
-    };
 
     render() {
         const {classes} = this.props;
