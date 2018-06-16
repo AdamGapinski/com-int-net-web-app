@@ -11,15 +11,43 @@ import HomeAppBar from "./HomeAppBar";
 import RegisterForm from "./RegisterForm";
 import HomeRegisterLayout from "./HomeRegisterLayout";
 
+class Api {
+    constructor(token) {
+        this.token = token;
+    }
+    fetchPosts = () => {
+        return fetch("http://localhost:8080/posts", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+    fetchComments = (postId) => {
+        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+}
+
 export default class Home extends React.Component {
     login = (user) => {
         this.setState({
-            user: user
+            user: user,
+            api: new Api(user.access_token)
         })
     };
     logout = () => {
         this.setState({
-            user: null
+            user: null,
+            api: null
         })
     };
     signUp = () => {
@@ -31,26 +59,6 @@ export default class Home extends React.Component {
         this.setState({
             registration: false
         })
-    };
-    fetchPosts = () => {
-        return fetch("http://localhost:8080/posts", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.user.access_token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    };
-    fetchComments = (postId) => {
-        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.user.access_token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
     };
     handleSignIn = () => {
         let username = document.getElementById("username-input").value;
@@ -121,8 +129,7 @@ export default class Home extends React.Component {
                 <div className={this.props.classes.root}>
                     <Header classes={this.props.classes}/>
                     <LeftPanel classes={this.props.classes}/>
-                    <MainPanel fetchPosts={this.fetchPosts} fetchComments={this.fetchComments}
-                               classes={this.props.classes}/>
+                    <MainPanel api={this.state.api} classes={this.props.classes}/>
                 </div>
             );
         } else if (this.state.registration) {

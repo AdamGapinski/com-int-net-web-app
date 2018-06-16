@@ -21,7 +21,7 @@ class CommentsList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchComments(this.props.post.id).then(fetched => {
+        this.props.api.fetchComments(this.props.post.id).then(fetched => {
             this.setState({
                 comments: fetched
             });

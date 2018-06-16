@@ -12,7 +12,7 @@ class PostsList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchPosts().then(fetched => {
+        this.props.api.fetchPosts().then(fetched => {
             this.setState({
                 posts: fetched
             });
@@ -22,8 +22,7 @@ class PostsList extends React.Component {
     render() {
         const postCards = [];
         if (this.state.posts && Array.isArray(this.state.posts)) {
-            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}
-                                                                      fetchComments={this.props.fetchComments}/>));
+            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post} api={this.props.api}/>));
         }
         return (
             <GridList>

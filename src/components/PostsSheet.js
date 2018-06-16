@@ -21,7 +21,7 @@ function PostsSheet(props) {
                 <Typography variant="headline" component="h3">
                     Posts
                 </Typography>
-                <PostsList fetchPosts={props.fetchPosts} fetchComments={props.fetchComments}/>
+                <PostsList api={props.api}/>
             </Paper>
         </div>
     );

@@ -105,7 +105,7 @@ class PostCard extends React.Component {
                     </CardActions>
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <CommentsList fetchComments={this.props.fetchComments} post={this.props.post}/>
+                            <CommentsList api={this.props.api} post={this.props.post}/>
                         </CardContent>
                     </Collapse>
                 </Card>
