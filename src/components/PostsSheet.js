@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import PostsList from "./PostsList";
 
 const styles = theme => ({
@@ -14,15 +12,9 @@ const styles = theme => ({
 });
 
 function PostsSheet(props) {
-    const {classes} = props;
     return (
         <div>
-            <Paper className={classes.root} elevation={4}>
-                <Typography variant="headline" component="h3">
-                    Posts
-                </Typography>
-                <PostsList api={props.api}/>
-            </Paper>
+            <PostsList api={props.api} categories={props.categories} refresh={true}/>
         </div>
     );
 }

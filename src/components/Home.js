@@ -25,8 +25,28 @@ class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
+    fetchPostsByCategory = (categoryName) => {
+        return fetch(`http://localhost:8080/categories/${categoryName}/posts`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
     fetchComments = (postId) => {
         return fetch(`http://localhost:8080/posts/${postId}/comments`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+    fetchCategories = () => {
+        return fetch(`http://localhost:8080/categories`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
