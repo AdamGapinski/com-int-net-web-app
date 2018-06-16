@@ -8,18 +8,24 @@ import React from "react";
 
 export default class AddPostDialog extends React.Component {
     addPost = () => {
-        fetch("http://localhost:8080/posts",
-            {
-                method: "POST",
-                body: JSON.stringify({contents: document.getElementById("add-post-text-field").value}),
-                headers: {
-                    'content-type': 'application/json'
-                },
-            })
-            .catch(error => console.error("Error:", error));
-        this.props.handleClose();
+        const input = document.getElementById("add-post-text-field").value;
+        const contents = input.replace(/#[a-z]+/gi, '').trim();
+        if (input && contents) {
+            const categories = [];
+            const matched = input.match(/#[a-z]+/gi);
+            if (matched != null) {
+                matched.map(htag => htag.slice(1))
+                    .forEach(tag => categories.push({name: tag}));
+            }
+            const post = {
+                contents: contents,
+                categories: categories
+            };
+            this.props.api.addPost(post, this.props.onSuccess, this.props.onFailure);
+            this.props.handleClose();
+            this.props.onPostAdd();
+        }
     };
-
     render() {
         return (
             <Dialog

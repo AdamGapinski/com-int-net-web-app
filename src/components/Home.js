@@ -12,9 +12,6 @@ import RegisterForm from "./RegisterForm";
 import HomeRegisterLayout from "./HomeRegisterLayout";
 
 class Api {
-    constructor(token) {
-        this.token = token;
-    }
     fetchPosts = () => {
         return fetch("http://localhost:8080/posts", {
             headers: {
@@ -23,6 +20,25 @@ class Api {
                 'Authorization': 'Bearer ' + this.token,
             }
         }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+    addPost = (post, onSuccess, onFailure) => {
+        return fetch("http://localhost:8080/posts", {
+            method: "POST",
+            body: JSON.stringify(post),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    onSuccess();
+                } else {
+                    onFailure();
+                }
+            })
             .catch(error => console.error('Error:', error));
     };
     fetchPostsByCategory = (categoryName) => {
@@ -55,6 +71,10 @@ class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
+
+    constructor(token) {
+        this.token = token;
+    }
 }
 
 export default class Home extends React.Component {

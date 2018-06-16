@@ -23,7 +23,8 @@ class CategoryPosts extends React.Component {
     render() {
         const postCards = [];
         if (this.state.posts && Array.isArray(this.state.posts)) {
-            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post} api={this.props.api}/>));
+            this.state.posts.forEach(post => postCards.push(<PostCard key={post.id} post={post}
+                                                                      api={this.props.api}/>));
         }
         return (
             <div key={this.props.key}>
@@ -41,7 +42,8 @@ class PostsList extends React.Component {
     render() {
         let posts = [];
         let key = 0;
-        this.props.categories.forEach(value => posts.push(<CategoryPosts key={key++} api={this.props.api} category={value}/>));
+        this.props.categories.forEach(value => posts.push(<CategoryPosts key={key++} api={this.props.api}
+                                                                         category={value}/>));
         return (
             <GridList>
                 {posts}

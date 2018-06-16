@@ -8,8 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
 
-let suggestions = undefined;
-
 function renderInput(inputProps) {
     const {InputProps, classes, ref, ...other} = inputProps;
 
@@ -54,36 +52,35 @@ renderSuggestion.propTypes = {
     suggestion: PropTypes.shape({label: PropTypes.string}).isRequired,
 };
 
-function getSuggestions(inputValue, api) {
-    if (suggestions === undefined) {
-        suggestions = [];
-        api.fetchCategories().then(fetched => {
-            fetched.forEach(category => {
-                suggestions.push({label: category.name})
-            })
-        })
+class DownshiftMultiple extends React.Component {
+    constructor(props){
+        super(props)
     }
 
-    let count = 0;
-
-    return suggestions.filter(suggestion => {
-        const keep =
-            (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
-            count < 5;
-
-        if (keep) {
-            count += 1;
-        }
-
-        return keep;
-    });
-}
-
-class DownshiftMultiple extends React.Component {
     state = {
         inputValue: '',
         selectedItem: [],
     };
+
+    getSuggestions(inputValue) {
+        let count = 0;
+        let suggestions = [];
+        this.props.suggestions.forEach(s => {
+            suggestions.push({label: s})
+        });
+        console.log(this.props.suggestions);
+        return suggestions.filter(suggestion => {
+            const keep =
+                (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
+                count < 5;
+
+            if (keep) {
+                count += 1;
+            }
+
+            return keep;
+        });
+    }
 
     handleKeyDown = event => {
         const {inputValue, selectedItem} = this.state;
@@ -156,7 +153,7 @@ class DownshiftMultiple extends React.Component {
                         })}
                         {isOpen ? (
                             <Paper className={classes.paper} square>
-                                {getSuggestions(inputValue2, this.props.api).map((suggestion, index) =>
+                                {this.getSuggestions(inputValue2).map((suggestion, index) =>
                                     renderSuggestion({
                                         suggestion,
                                         index,
@@ -210,6 +207,7 @@ function CategorySearch(props) {
             <DownshiftMultiple api={props.api}
                                onCategoryAdd={props.onCategoryAdd}
                                onCategoryDelete={props.onCategoryDelete}
+                               suggestions={props.suggestions}
                                classes={classes}/>
         </div>
     );

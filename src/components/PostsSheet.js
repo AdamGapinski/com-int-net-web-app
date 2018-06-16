@@ -14,7 +14,7 @@ const styles = theme => ({
 function PostsSheet(props) {
     return (
         <div>
-            <PostsList api={props.api} categories={props.categories} refresh={true}/>
+            <PostsList api={props.api} categories={props.categories}/>
         </div>
     );
 }
