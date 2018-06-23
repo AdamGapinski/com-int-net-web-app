@@ -16,8 +16,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "heroku-start": "react-scripts start -a 0.0.0.0 -p ${PORT}",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-prebuild": "npm install"
   }
 }
