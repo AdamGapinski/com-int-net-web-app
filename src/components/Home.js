@@ -9,113 +9,18 @@ import base64 from "base-64";
 import HomeLayout from "./HomeLayout";
 import HomeAppBar from "./HomeAppBar";
 import RegisterForm from "./RegisterForm";
+import Api from "./Api";
 import HomeRegisterLayout from "./HomeRegisterLayout";
 
-class Api {
-    fetchPosts = () => {
-        return fetch("http://localhost:8080/posts", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    };
-    addPost = (post, onSuccess, onFailure) => {
-        return fetch("http://localhost:8080/posts", {
-            method: "POST",
-            body: JSON.stringify(post),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            },
-        })
-            .then(response => {
-                if (response.status === 201) {
-                    onSuccess();
-                } else {
-                    onFailure();
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
-    addComment = (comment, post, onSuccess, onFailure) => {
-        return fetch(`http://localhost:8080/posts/${post.id}/comments`, {
-            method: "POST",
-            body: JSON.stringify(comment),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            },
-        })
-            .then(response => {
-                if (response.status === 201) {
-                    onSuccess();
-                } else {
-                    onFailure();
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    };
-    fetchPostsByCategory = (category) => {
-        return fetch(`http://localhost:8080/categories/${category}/posts`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    };
-    fetchPostsByCategories = (categories) => {
-        if (Array.isArray(categories)) {
-            let categoryList = categories.join("3");
-            console.log(`http://localhost:8080/categories/list/${categoryList}/posts`);
-            return fetch(`http://localhost:8080/categories/list/${categoryList}/posts`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + this.token,
-                }
-            }).then(r => r.json())
-                .catch(error => console.error('Error:', error));
-        }
-    };
-    fetchComments = (postId) => {
-        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    };
-    fetchCategories = () => {
-        return fetch(`http://localhost:8080/categories`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
-            }
-        }).then(r => r.json())
-            .catch(error => console.error('Error:', error));
-    };
-
-    constructor(token) {
-        this.token = token;
-    }
-}
-
 export default class Home extends React.Component {
-    login = (user) => {
-        this.setState({
-            user: user,
-            api: new Api(user.access_token)
-        })
+    login = (response) => {
+        const api = new Api(response.access_token);
+        api.fetchUser().then(fetched => {
+            this.setState({
+                user: fetched,
+                api: api
+            })
+        });
     };
     logout = () => {
         this.setState({
@@ -202,7 +107,7 @@ export default class Home extends React.Component {
                 <div className={this.props.classes.root}>
                     <Header classes={this.props.classes}/>
                     <LeftPanel classes={this.props.classes}/>
-                    <MainPanel api={this.state.api} classes={this.props.classes}/>
+                    <MainPanel api={this.state.api} user={this.state.user} classes={this.props.classes}/>
                 </div>
             );
         } else if (this.state.registration) {

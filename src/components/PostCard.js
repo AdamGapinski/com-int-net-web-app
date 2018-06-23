@@ -52,14 +52,37 @@ const styles = theme => ({
 
 class PostCard extends React.Component {
     handleExpandClick = () => {
-        this.setState({expanded: !this.state.expanded});
+        this.setState({
+            expanded: !this.state.expanded
+        });
     };
+
+    fetchLikes = () => {
+        this.props.api.fetchLikes(this.props.post).then(fetched => {
+            console.log(fetched);
+            this.setState({
+                likes: fetched
+            });
+        });
+    };
+
+    addLike = () => {
+        if (this.state.likes.filter(like => like.author.id === this.props.user.id).length === 0) {
+            this.props.api.addLike(this.props.post, this.fetchLikes);
+        }
+    };
+
+    componentDidMount() {
+        this.fetchLikes();
+    }
 
     constructor(props) {
         super(props);
-        this.state = {expanded: false};
+        this.state = {
+            expanded: false,
+            likes: []
+        };
     }
-
     render() {
         const {classes} = this.props;
 
@@ -86,9 +109,9 @@ class PostCard extends React.Component {
                         </Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
-                        <Badge color="primary" badgeContent={0}
+                        <Badge color="primary" badgeContent={this.state.likes.length}
                                className={classes.margin}>
-                            <IconButton aria-label="Plus">
+                            <IconButton aria-label="Plus" onClick={this.addLike}>
                                 <ExposurePlus1/>
                             </IconButton>
                         </Badge>
@@ -105,7 +128,7 @@ class PostCard extends React.Component {
                     </CardActions>
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <CommentsSection api={this.props.api} post={this.props.post}/>
+                            <CommentsSection api={this.props.api} post={this.props.post} user={this.props.user}/>
                         </CardContent>
                     </Collapse>
                 </Card>

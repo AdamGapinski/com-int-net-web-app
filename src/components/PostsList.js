@@ -31,7 +31,8 @@ class PostsList extends React.Component {
                 console.log(fetched);
                 if (fetched && Array.isArray(fetched)) {
                     this.setState({
-                        posts: fetched.map(post => <PostCard key={post.id} post={post} api={this.props.api}/>),
+                        posts: fetched.map(post => <PostCard key={post.id} post={post} user={this.props.user}
+                                                             api={this.props.api}/>),
                         fetchedCategories: this.props.categories.slice(0)
                     });
                 }

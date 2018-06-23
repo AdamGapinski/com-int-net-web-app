@@ -32,7 +32,7 @@ export default class CommentsSection extends React.Component {
                 <CommentsList api={this.props.api}
                               post={this.props.post}
                               comments={this.state.comments}/>
-                <AddCommentField api={this.props.api} post={this.props.post}
+                <AddCommentField api={this.props.api} user={this.props.user} post={this.props.post}
                                  onSuccess={this.commentAdded}/>
             </div>
         );

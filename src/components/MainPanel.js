@@ -68,7 +68,8 @@ class MainPanel extends React.Component {
                                 onCategoryDelete={this.onCategoryDelete}
                                 suggestions={this.state.suggestions}/>
                 <PostsSheet api={this.props.api}
-                            categories={categories}/>
+                            categories={categories}
+                            user={this.props.user}/>
                 <AddPostButton api={this.props.api}
                                classes={this.props.classes}
                                onPostAdd={this.onPostAdd}

@@ -68,7 +68,7 @@ class AddCommentField extends React.Component {
                     <Grid container spacing={8} alignItems="flex-end">
                         <Grid item>
                             <Avatar className={this.props.classes.avatar}>
-                                A
+                                {this.props.user.username[0].toUpperCase()}
                             </Avatar>
                         </Grid>
                         <Grid item>

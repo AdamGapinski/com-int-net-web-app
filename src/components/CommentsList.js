@@ -17,14 +17,6 @@ class CommentsList extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.props.api.fetchComments(this.props.post.id).then(fetched => {
-            this.setState({
-                comments: fetched
-            });
-        });
-    }
-
     render() {
         const comments = [];
         if (this.props.comments && Array.isArray(this.props.comments)) {
