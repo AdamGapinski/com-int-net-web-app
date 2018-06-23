@@ -2,7 +2,7 @@ import React from "react";
 import AddIcon from "@material-ui/icons/Add"
 import Button from '@material-ui/core/Button';
 import AddPostDialog from "./AddPostDialog";
-import AddPostResultSnackbar from "./AddPostResultSnackbar";
+import AddResultSnackbar from "./AddResultSnackbar";
 
 class AddPostButton extends React.Component {
     handleClickOpen = () => {
@@ -33,9 +33,9 @@ class AddPostButton extends React.Component {
         let snackbar = <div/>;
         if (this.state.success !== undefined) {
             if (this.state.success) {
-                snackbar = <AddPostResultSnackbar text="Post added!"/>
+                snackbar = <AddResultSnackbar text="Post added!"/>
             } else {
-                snackbar = <AddPostResultSnackbar text="Failure while adding post"/>
+                snackbar = <AddResultSnackbar text="Failure while adding post"/>
             }
         }
         return (

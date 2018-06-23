@@ -1,9 +1,12 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 
-class AddPostResultSnackbar extends React.Component {
+class AddResultSnackbar extends React.Component {
     handleClose = () => {
         this.setState({open: false});
+        if (this.props.onSnackbarClose) {
+            this.props.onSnackbarClose();
+        }
     };
 
     constructor(props) {
@@ -33,4 +36,4 @@ class AddPostResultSnackbar extends React.Component {
     }
 }
 
-export default AddPostResultSnackbar;
+export default AddResultSnackbar;

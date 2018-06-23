@@ -41,6 +41,25 @@ class Api {
             })
             .catch(error => console.error('Error:', error));
     };
+    addComment = (comment, post, onSuccess, onFailure) => {
+        return fetch(`http://localhost:8080/posts/${post.id}/comments`, {
+            method: "POST",
+            body: JSON.stringify(comment),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    onSuccess();
+                } else {
+                    onFailure();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
     fetchPostsByCategory = (category) => {
         return fetch(`http://localhost:8080/categories/${category}/posts`, {
             headers: {

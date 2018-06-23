@@ -16,6 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExposurePlus1 from "@material-ui/icons/es/ExposurePlus1";
 import Badge from "@material-ui/core/es/Badge/Badge";
 import CommentsList from "./CommentsList";
+import AddCommentField from "./AddCommentField";
 
 const styles = theme => ({
     card: {
@@ -106,6 +107,7 @@ class PostCard extends React.Component {
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         <CardContent>
                             <CommentsList api={this.props.api} post={this.props.post}/>
+                            <AddCommentField api={this.props.api} post={this.props.post}/>
                         </CardContent>
                     </Collapse>
                 </Card>
