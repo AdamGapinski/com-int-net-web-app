@@ -10,10 +10,11 @@ import HomeLayout from "./HomeLayout";
 import HomeAppBar from "./HomeAppBar";
 import RegisterForm from "./RegisterForm";
 import HomeRegisterLayout from "./HomeRegisterLayout";
+import CONFIG from "./../config.json";
 
 class Api {
     fetchPosts = () => {
-        return fetch("http://localhost:8080/posts", {
+        return fetch(CONFIG.serverUrl+"/posts", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ class Api {
             .catch(error => console.error('Error:', error));
     };
     addPost = (post, onSuccess, onFailure) => {
-        return fetch("http://localhost:8080/posts", {
+        return fetch(CONFIG.serverUrl+"/posts", {
             method: "POST",
             body: JSON.stringify(post),
             headers: {
@@ -42,7 +43,7 @@ class Api {
             .catch(error => console.error('Error:', error));
     };
     addComment = (comment, post, onSuccess, onFailure) => {
-        return fetch(`http://localhost:8080/posts/${post.id}/comments`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/comments`, {
             method: "POST",
             body: JSON.stringify(comment),
             headers: {
@@ -61,7 +62,7 @@ class Api {
             .catch(error => console.error('Error:', error));
     };
     fetchPostsByCategory = (category) => {
-        return fetch(`http://localhost:8080/categories/${category}/posts`, {
+        return fetch(`${CONFIG.serverUrl}/categories/${category}/posts`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -73,8 +74,8 @@ class Api {
     fetchPostsByCategories = (categories) => {
         if (Array.isArray(categories)) {
             let categoryList = categories.join("3");
-            console.log(`http://localhost:8080/categories/list/${categoryList}/posts`);
-            return fetch(`http://localhost:8080/categories/list/${categoryList}/posts`, {
+            console.log(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`);
+            return fetch(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ class Api {
         }
     };
     fetchComments = (postId) => {
-        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${postId}/comments`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -95,7 +96,7 @@ class Api {
             .catch(error => console.error('Error:', error));
     };
     fetchCategories = () => {
-        return fetch(`http://localhost:8080/categories`, {
+        return fetch(`${CONFIG.serverUrl}/categories`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -142,9 +143,9 @@ export default class Home extends React.Component {
             return;
         }
         let hdrs = new Headers();
-        hdrs.append('Authorization', 'Basic ' + base64.encode("NllndsADVij93JDSvl" + ":" + "jlaCnlDS38jDMasdfOWF6"));
+        hdrs.append('Authorization', 'Basic ' + base64.encode(CONFIG.id + ":" + CONFIG.secret));
         hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        fetch("http://localhost:8080/oauth/token", {
+        fetch(CONFIG.serverUrl+"/oauth/token", {
             method: "POST",
             body: `grant_type=password&username=${username}&password=${password}`,
             headers: hdrs
@@ -173,7 +174,7 @@ export default class Home extends React.Component {
         }
         let hdrs = new Headers();
         hdrs.append('Content-Type', "application/json");
-        fetch("http://localhost:8080/user/new", {
+        fetch(CONFIG.serverUrl+"/user/new", {
             method: "POST",
             body: JSON.stringify({
                 username: username,
