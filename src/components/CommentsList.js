@@ -15,9 +15,6 @@ const styles = theme => ({
 class CommentsList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            comments: []
-        }
     }
 
     componentDidMount() {
@@ -30,8 +27,8 @@ class CommentsList extends React.Component {
 
     render() {
         const comments = [];
-        if (this.state.comments && Array.isArray(this.state.comments)) {
-            this.state.comments.forEach(comment => comments.push(<Comment key={comment.id} comment={comment}/>));
+        if (this.props.comments && Array.isArray(this.props.comments)) {
+            this.props.comments.forEach(comment => comments.push(<Comment key={comment.id} comment={comment}/>));
         }
 
         return (

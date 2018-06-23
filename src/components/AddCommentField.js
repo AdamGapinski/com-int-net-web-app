@@ -25,6 +25,7 @@ class AddCommentField extends React.Component {
             success: true
         });
         document.getElementById("input-comment").value = "";
+        this.props.onSuccess();
     };
 
     onFailure = () => {

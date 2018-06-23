@@ -11,7 +11,7 @@ export default class Comment extends React.Component {
 
     render() {
         return (
-            <ListItem>
+            <ListItem style={{paddingLeft: '0px', paddingRight: '0px'}}>
                 <Avatar style={{
                     backgroundColor: red[500]
                 }}>
