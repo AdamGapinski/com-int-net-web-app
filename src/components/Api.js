@@ -1,6 +1,8 @@
+import CONFIG from "./../config.json";
+
 export default class Api {
     addPost = (post, onSuccess, onFailure) => {
-        return fetch("http://localhost:8080/posts", {
+        return fetch(`${CONFIG.serverUrl}/posts`, {
             method: "POST",
             body: JSON.stringify(post),
             headers: {
@@ -19,7 +21,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     };
     addComment = (comment, post, onSuccess, onFailure) => {
-        return fetch(`http://localhost:8080/posts/${post.id}/comments`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/comments`, {
             method: "POST",
             body: JSON.stringify(comment),
             headers: {
@@ -38,7 +40,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     };
     addLike = (post, onSuccess) => {
-        return fetch(`http://localhost:8080/posts/${post.id}/likes`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/likes`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -54,7 +56,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     };
     fetchUser() {
-        return fetch(`http://localhost:8080/user/me`, {
+        return fetch(`${CONFIG.serverUrl}/user/me`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -64,7 +66,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     }
     fetchPostsByCategory = (category) => {
-        return fetch(`http://localhost:8080/categories/${category}/posts`, {
+        return fetch(`${CONFIG.serverUrl}/categories/${category}/posts`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -76,8 +78,8 @@ export default class Api {
     fetchPostsByCategories = (categories) => {
         if (Array.isArray(categories)) {
             let categoryList = categories.join("3");
-            console.log(`http://localhost:8080/categories/list/${categoryList}/posts`);
-            return fetch(`http://localhost:8080/categories/list/${categoryList}/posts`, {
+            console.log(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`);
+            return fetch(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -88,7 +90,7 @@ export default class Api {
         }
     };
     fetchComments = (postId) => {
-        return fetch(`http://localhost:8080/posts/${postId}/comments`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${postId}/comments`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -98,7 +100,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     };
     fetchLikes = (post) => {
-        return fetch(`http://localhost:8080/posts/${post.id}/likes`, {
+        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/likes`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -108,7 +110,7 @@ export default class Api {
             .catch(error => console.error('Error:', error));
     };
     fetchCategories = () => {
-        return fetch(`http://localhost:8080/categories`, {
+        return fetch(`${CONFIG.serverUrl}/categories`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

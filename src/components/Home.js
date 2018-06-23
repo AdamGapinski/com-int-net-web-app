@@ -11,6 +11,7 @@ import HomeAppBar from "./HomeAppBar";
 import RegisterForm from "./RegisterForm";
 import Api from "./Api";
 import HomeRegisterLayout from "./HomeRegisterLayout";
+import CONFIG from "./../config.json";
 
 export default class Home extends React.Component {
     login = (response) => {
@@ -47,9 +48,9 @@ export default class Home extends React.Component {
             return;
         }
         let hdrs = new Headers();
-        hdrs.append('Authorization', 'Basic ' + base64.encode("NllndsADVij93JDSvl" + ":" + "jlaCnlDS38jDMasdfOWF6"));
+        hdrs.append('Authorization', 'Basic ' + base64.encode(CONFIG.id + ":" + CONFIG.secret));
         hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        fetch("http://localhost:8080/oauth/token", {
+        fetch(CONFIG.serverUrl+"/oauth/token", {
             method: "POST",
             body: `grant_type=password&username=${username}&password=${password}`,
             headers: hdrs
@@ -78,7 +79,7 @@ export default class Home extends React.Component {
         }
         let hdrs = new Headers();
         hdrs.append('Content-Type', "application/json");
-        fetch("http://localhost:8080/user/new", {
+        fetch(CONFIG.serverUrl+"/user/new", {
             method: "POST",
             body: JSON.stringify({
                 username: username,

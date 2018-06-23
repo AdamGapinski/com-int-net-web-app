@@ -1,0 +1,5 @@
+{
+  "serverUrl": "https://localhost:8080",
+  "id":"your_id",
+  "secret":"your_secret"
+}
