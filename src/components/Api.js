@@ -119,6 +119,16 @@ export default class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
+    fetchSubscriptions = () => {
+        return fetch(`${CONFIG.serverUrl}/user/subscriptions`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
 
     constructor(token) {
         this.token = token;

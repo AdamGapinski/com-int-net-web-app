@@ -25,7 +25,7 @@ class LeftPanel extends React.Component {
             >
                 <div className={this.props.classes.toolbar}/>
                 <List>
-                    <ListItem button>
+                    <ListItem button onClick={this.props.onHomeClick}>
                         <ListItemIcon>
                             <HomeIcon/>
                         </ListItemIcon>
@@ -46,7 +46,7 @@ class LeftPanel extends React.Component {
                 </List>
                 <Divider/>
                 <List>
-                    <ListItem button>
+                    <ListItem button onClick={this.props.onSubscriptionsClick}>
                         <ListItemIcon>
                             <SubscriptionsIcon/>
                         </ListItemIcon>

@@ -1,8 +1,5 @@
 import React from 'react';
 import '../style/App.css';
-import Header from "../components/Header";
-import LeftPanel from "../components/LeftPanel";
-import MainPanel from "../components/MainPanel";
 import Button from '@material-ui/core/Button';
 import LoginForm from "./LoginForm";
 import base64 from "base-64";
@@ -12,6 +9,7 @@ import RegisterForm from "./RegisterForm";
 import Api from "./Api";
 import HomeRegisterLayout from "./HomeRegisterLayout";
 import CONFIG from "./../config.json";
+import MainAppContent from "./MainAppContent";
 
 export default class Home extends React.Component {
     login = (response) => {
@@ -106,9 +104,7 @@ export default class Home extends React.Component {
         if (this.state.user) {
             return (
                 <div className={this.props.classes.root}>
-                    <Header classes={this.props.classes}/>
-                    <LeftPanel classes={this.props.classes}/>
-                    <MainPanel api={this.state.api} user={this.state.user} classes={this.props.classes}/>
+                    <MainAppContent api={this.state.api} user={this.state.user} classes={this.props.classes}/>
                 </div>
             );
         } else if (this.state.registration) {
