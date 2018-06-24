@@ -59,13 +59,17 @@ export default class SubscriptionsPanel extends React.Component {
             }, () => {
                 this.setState({
                     subscribed: true
-                })
+                });
+                this.fetchSubscriptions();
             }, () => {
                 this.setState({
                     subscribed: false
                 })
             })
         })
+    };
+    onSubscriptionDelete = () => {
+        this.fetchSubscriptions();
     };
 
     render() {
@@ -85,7 +89,9 @@ export default class SubscriptionsPanel extends React.Component {
                                 onCategoryDelete={this.onCategoryDelete}
                                 suggestions={this.state.suggestions}/>
                 <SubscribeButton onSubscribe={this.onSubscribe}/>
-                <SubscriptionsList subscriptions={this.state.subscriptions}/>
+                <SubscriptionsList subscriptions={this.state.subscriptions}
+                                   api={this.props.api}
+                                   onSubscriptionDelete={this.onSubscriptionDelete}/>
                 {snackbar}
             </div>
         );

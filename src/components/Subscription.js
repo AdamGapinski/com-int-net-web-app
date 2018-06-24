@@ -13,6 +13,10 @@ export default class Subscription extends React.Component {
         super(props)
     }
 
+    onSubscriptionDelete = () => {
+        this.props.onSubscriptionDelete(this.props.subscription);
+    };
+
     render() {
         return (
             <ListItem>
@@ -25,7 +29,7 @@ export default class Subscription extends React.Component {
                     primary={this.props.subscription.name}
                 />
                 <ListItemSecondaryAction>
-                    <IconButton aria-label="Delete" onClick={this.props.onCategoryDelete}>
+                    <IconButton aria-label="Delete" onClick={this.onSubscriptionDelete}>
                         <DeleteIcon />
                     </IconButton>
                 </ListItemSecondaryAction>
