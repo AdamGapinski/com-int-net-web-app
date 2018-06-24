@@ -50,7 +50,7 @@ export default class HomePanel extends React.Component {
         this.props.api.fetchSubscriptions().then(fetched => {
             if (fetched && Array.isArray(fetched)) {
                 this.setState({
-                    subscriptions: fetched.map(subscription => subscription.category.name)
+                    subscriptions: fetched.map(category => category.name)
                 })
             }
         })

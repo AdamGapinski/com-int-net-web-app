@@ -55,6 +55,25 @@ export default class Api {
             })
             .catch(error => console.error('Error:', error));
     };
+    addSubscription = (category, onSuccess, onFailure) => {
+        return fetch(`${CONFIG.serverUrl}/user/subscriptions`, {
+            method: "POST",
+            body: JSON.stringify(category),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    onSuccess();
+                } else {
+                    onFailure();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
     fetchUser() {
         return fetch(`${CONFIG.serverUrl}/user/me`, {
             headers: {
