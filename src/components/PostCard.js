@@ -101,7 +101,7 @@ class PostCard extends React.Component {
                             </IconButton>
                         }
                         title={this.props.post.author.username}
-                        subheader="September 14, 2016"
+                        /*subheader="September 14, 2016"*/
                     />
                     <CardContent>
                         <Typography component="p">

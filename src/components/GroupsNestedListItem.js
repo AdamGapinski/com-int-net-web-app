@@ -23,7 +23,7 @@ const styles = theme => ({
 });
 
 class GroupsNestedListItem extends React.Component {
-    state = {open: false};
+    state = {open: true};
 
     handleClick = () => {
         this.props.onGroupsClick();

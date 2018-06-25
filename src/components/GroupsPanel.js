@@ -110,10 +110,12 @@ export default class GroupsPanel extends React.Component {
                                 onAdd={this.onGroupAdd}
                                 onDelete={this.onGroupDelete}
                                 suggestions={this.state.suggestions}
+                                selectedItem={this.state.selectedGroups}
                                 placeholder="select group"/>
                 <Button variant="raised" color="primary" onClick={this.onGroupJoin}>
                     Join selected
                 </Button>
+                <br/><br/>
                 <Button variant="raised" color="primary" onClick={this.onGroupCreate}>
                     Create group
                 </Button>
