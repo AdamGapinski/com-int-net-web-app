@@ -27,17 +27,43 @@ export default class MainAppContent extends React.Component {
         }
     };
 
+    onGroupsClick = () => {
+        if (this.state.active !== 'groups') {
+            this.setState({
+                active: 'groups'
+            })
+        }
+    };
+
+    fetchGroups = () => {
+        this.props.api.fetchUserGroups().then(fetched => {
+            if (fetched && Array.isArray(fetched)) {
+                this.setState({
+                    groups: fetched
+                })
+            }
+        })
+    };
+
+    componentDidMount() {
+        this.fetchGroups();
+    }
+
     render() {
         return (
             <div className={this.props.classes.root}>
                 <Header classes={this.props.classes}/>
                 <LeftPanel classes={this.props.classes}
                            onHomeClick={this.onHomeClick}
-                           onSubscriptionsClick={this.onSubscriptionsClick}/>
+                           onSubscriptionsClick={this.onSubscriptionsClick}
+                           onGroupsClick={this.onGroupsClick}
+                           groups={this.state.groups}
+                           fetchGroups={this.fetchGroups}/>
                 <MainPanel api={this.props.api}
                            user={this.props.user}
                            classes={this.props.classes}
-                           active={this.state.active}/>
+                           active={this.state.active}
+                           fetchGroups={this.fetchGroups}/>
             </div>
         );
     }

@@ -74,6 +74,25 @@ export default class Api {
             })
             .catch(error => console.error('Error:', error));
     };
+    addGroup = (group, onSuccess, onFailure) => {
+        return fetch(`${CONFIG.serverUrl}/groups`, {
+            method: "POST",
+            body: JSON.stringify(group),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    onSuccess();
+                } else {
+                    onFailure();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
     deleteSubscription = (category, onSuccess, onFailure) => {
         return fetch(`${CONFIG.serverUrl}/user/subscriptions`, {
             method: "DELETE",
@@ -167,7 +186,45 @@ export default class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
-
+    fetchUserGroups = () => {
+        return fetch(`${CONFIG.serverUrl}/user/groups`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+    fetchGroups = () => {
+        return fetch(`${CONFIG.serverUrl}/groups`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            }
+        }).then(r => r.json())
+            .catch(error => console.error('Error:', error));
+    };
+    joinGroup = (group, onSuccess, onFailure) => {
+        return fetch(`${CONFIG.serverUrl}/user/groups`, {
+            method: "POST",
+            body: JSON.stringify(group),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 204) {
+                    onSuccess();
+                } else {
+                    onFailure();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
     constructor(token) {
         this.token = token;
     }

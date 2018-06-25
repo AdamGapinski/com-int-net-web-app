@@ -6,9 +6,8 @@ import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import React from "react";
 import Divider from "@material-ui/core/Divider/Divider";
 import HomeIcon from "@material-ui/icons/Home";
-import GroupIcon from "@material-ui/icons/Group";
-import WebIcon from "@material-ui/icons/Web";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import GroupsNestedListItem from "./GroupsNestedListItem";
 
 class LeftPanel extends React.Component {
     constructor(props) {
@@ -31,18 +30,9 @@ class LeftPanel extends React.Component {
                         </ListItemIcon>
                         <ListItemText primary="Home"/>
                     </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <GroupIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Groups"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <WebIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Recommended"/>
-                    </ListItem>
+                    <GroupsNestedListItem groups={this.props.groups}
+                                          onGroupsClick={this.props.onGroupsClick}
+                                          fetchGroups={this.props.fetchGroups}/>
                 </List>
                 <Divider/>
                 <List>

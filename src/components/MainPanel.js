@@ -1,6 +1,7 @@
 import React from "react";
 import HomePanel from "./HomePanel";
 import SubscriptionsPanel from "./SubscriptionsPanel";
+import GroupsPanel from "./GroupsPanel";
 
 class MainPanel extends React.Component {
     constructor(props) {
@@ -15,6 +16,8 @@ class MainPanel extends React.Component {
                                 classes={this.props.classes}/>);
         } else if (this.props.active === 'subscriptions') {
             result = (<SubscriptionsPanel api={this.props.api} classes={this.props.classes}/>);
+        } else if (this.props.active === 'groups') {
+            result = (<GroupsPanel api={this.props.api} classes={this.props.classes} fetchGroups={this.props.fetchGroups}/>);
         }
         return result;
     }

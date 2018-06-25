@@ -79,14 +79,14 @@ class DownshiftMultiple extends React.Component {
             inputValue: '',
             selectedItem,
         });
-        this.props.onCategoryAdd(selectedItem.slice());
+        this.props.onAdd(selectedItem.slice());
     };
     handleDelete = item => () => {
         const selectedItem = [...this.state.selectedItem];
         selectedItem.splice(selectedItem.indexOf(item), 1);
 
         this.setState({selectedItem});
-        this.props.onCategoryDelete(selectedItem.slice());
+        this.props.onDelete(selectedItem.slice());
     };
 
     constructor(props) {
@@ -143,7 +143,7 @@ class DownshiftMultiple extends React.Component {
                                 )),
                                 onChange: this.handleInputChange,
                                 onKeyDown: this.handleKeyDown,
-                                placeholder: 'Select categories',
+                                placeholder: this.props.placeholder === undefined ? 'Select categories' : this.props.placeholder,
                                 id: 'integration-downshift-multiple',
                             }),
                         })}
@@ -201,10 +201,11 @@ function CategorySearch(props) {
     return (
         <div className={classes.root}>
             <DownshiftMultiple api={props.api}
-                               onCategoryAdd={props.onCategoryAdd}
-                               onCategoryDelete={props.onCategoryDelete}
+                               onAdd={props.onAdd}
+                               onDelete={props.onAdd}
                                suggestions={props.suggestions}
-                               classes={classes}/>
+                               classes={classes}
+                               placeholder={props.placeholder}/>
         </div>
     );
 }

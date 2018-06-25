@@ -74,8 +74,8 @@ export default class HomePanel extends React.Component {
             <main className={this.props.classes.content}>
                 <div className={this.props.classes.toolbar}/>
                 <CategorySearch api={this.props.api}
-                                onCategoryAdd={this.onCategoryAdd}
-                                onCategoryDelete={this.onCategoryDelete}
+                                onAdd={this.onCategoryAdd}
+                                onDelete={this.onCategoryDelete}
                                 suggestions={this.state.suggestions}/>
                 <PostsSheet api={this.props.api}
                             categories={categories}

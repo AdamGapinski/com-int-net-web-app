@@ -85,8 +85,8 @@ export default class SubscriptionsPanel extends React.Component {
             <div className={this.props.classes.content}>
                 <div className={this.props.classes.toolbar}/>
                 <CategorySearch api={this.props.api}
-                                onCategoryAdd={this.onCategoryAdd}
-                                onCategoryDelete={this.onCategoryDelete}
+                                onAdd={this.onCategoryAdd}
+                                onDelete={this.onCategoryDelete}
                                 suggestions={this.state.suggestions}/>
                 <SubscribeButton onSubscribe={this.onSubscribe}/>
                 <SubscriptionsList subscriptions={this.state.subscriptions}
