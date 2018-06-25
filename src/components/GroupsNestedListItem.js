@@ -9,6 +9,7 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import GroupIcon from "@material-ui/icons/Group";
+import Group from "./Group";
 
 const styles = theme => ({
     root: {
@@ -35,12 +36,9 @@ class GroupsNestedListItem extends React.Component {
         if (Array.isArray(this.props.groups)) {
             this.props.groups.forEach(group => {
                 groups.push(
-                    <ListItem button className={classes.nested}>
-                        <ListItemIcon>
-                            <GroupIcon/>
-                        </ListItemIcon>
-                        <ListItemText inset primary={group.name}/>
-                    </ListItem>
+                    <Group group={group} classes={classes} key={group.id}
+                           onGroupClick={this.props.onGroupClick}
+                           onGroupLeaveClick={this.props.onGroupLeaveClick}/>
                 )
             })
         }

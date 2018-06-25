@@ -112,6 +112,7 @@ export default class Api {
             })
             .catch(error => console.error('Error:', error));
     };
+
     fetchUser() {
         return fetch(`${CONFIG.serverUrl}/user/me`, {
             headers: {
@@ -122,6 +123,7 @@ export default class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     }
+
     fetchPostsByCategory = (category) => {
         return fetch(`${CONFIG.serverUrl}/categories/${category}/posts`, {
             headers: {
@@ -225,6 +227,24 @@ export default class Api {
             })
             .catch(error => console.error('Error:', error));
     };
+    leaveGroup = (group, onSuccess) => {
+        return fetch(`${CONFIG.serverUrl}/user/groups/leave`, {
+            method: "POST",
+            body: JSON.stringify(group),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.token,
+            },
+        })
+            .then(response => {
+                if (response.status === 204) {
+                    onSuccess();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    };
+
     constructor(token) {
         this.token = token;
     }

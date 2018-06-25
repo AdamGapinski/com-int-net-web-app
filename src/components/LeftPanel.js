@@ -32,7 +32,9 @@ class LeftPanel extends React.Component {
                     </ListItem>
                     <GroupsNestedListItem groups={this.props.groups}
                                           onGroupsClick={this.props.onGroupsClick}
-                                          fetchGroups={this.props.fetchGroups}/>
+                                          fetchGroups={this.props.fetchGroups}
+                                          onGroupClick={this.props.onGroupClick}
+                                          onGroupLeaveClick={this.props.onGroupLeaveClick}/>
                 </List>
                 <Divider/>
                 <List>

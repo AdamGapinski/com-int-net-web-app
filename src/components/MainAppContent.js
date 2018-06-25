@@ -35,6 +35,19 @@ export default class MainAppContent extends React.Component {
         }
     };
 
+    onGroupClick = (group) => {
+        if (this.state.active !== 'group') {
+            this.setState({
+                active: 'group',
+                name: group.name
+            })
+        }
+    };
+
+    onGroupLeaveClick = (group) => {
+        this.props.api.leaveGroup(group, () => this.fetchGroups());
+    };
+
     fetchGroups = () => {
         this.props.api.fetchUserGroups().then(fetched => {
             if (fetched && Array.isArray(fetched)) {
@@ -57,6 +70,8 @@ export default class MainAppContent extends React.Component {
                            onHomeClick={this.onHomeClick}
                            onSubscriptionsClick={this.onSubscriptionsClick}
                            onGroupsClick={this.onGroupsClick}
+                           onGroupClick={this.onGroupClick}
+                           onGroupLeaveClick={this.onGroupLeaveClick}
                            groups={this.state.groups}
                            fetchGroups={this.fetchGroups}/>
                 <MainPanel api={this.props.api}
