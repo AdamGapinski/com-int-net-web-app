@@ -76,7 +76,8 @@ export default class HomePanel extends React.Component {
                 <CategorySearch api={this.props.api}
                                 onAdd={this.onCategoryAdd}
                                 onDelete={this.onCategoryDelete}
-                                suggestions={this.state.suggestions}/>
+                                suggestions={this.state.suggestions}
+                                selectedItem={this.state.categories}/>
                 <PostsSheet api={this.props.api}
                             categories={categories}
                             user={this.props.user}/>

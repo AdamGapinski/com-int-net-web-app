@@ -108,6 +108,12 @@ class DownshiftMultiple extends React.Component {
         });
     }
 
+    componentWillReceiveProps(props, context) {
+        this.setState({
+            selectedItem: props.selectedItem !== undefined ? props.selectedItem : this.state.selectedItem
+        })
+    }
+
     render() {
         const {classes} = this.props;
         const {inputValue, selectedItem} = this.state;
@@ -200,7 +206,8 @@ function CategorySearch(props) {
                                onDelete={props.onAdd}
                                suggestions={props.suggestions}
                                classes={classes}
-                               placeholder={props.placeholder}/>
+                               placeholder={props.placeholder}
+                               selectedItem={props.selectedItem}/>
         </div>
     );
 }
