@@ -72,7 +72,6 @@ export default class Home extends React.Component {
             return;
         }
         if (password !== password_repeat) {
-            console.log("Passwords does not match.");
             return;
         }
         let hdrs = new Headers();
@@ -86,7 +85,6 @@ export default class Home extends React.Component {
             headers: hdrs
         })
             .then(jsonResponse => {
-                console.log(jsonResponse);
                 this.registered();
             })
             .catch(error => console.error("Error:", error));

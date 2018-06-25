@@ -112,11 +112,21 @@ export default class GroupsPanel extends React.Component {
                                 suggestions={this.state.suggestions}
                                 selectedItem={this.state.selectedGroups}
                                 placeholder="select group"/>
-                <Button variant="raised" color="primary" onClick={this.onGroupJoin}>
+                <Button variant="raised" color="primary" onClick={this.onGroupJoin}
+                        style={{
+                            position: 'absolute',
+                            top: '140px',
+                            right: '50px'
+                        }}>
                     Join selected
                 </Button>
                 <br/><br/>
-                <Button variant="raised" color="primary" onClick={this.onGroupCreate}>
+                <Button variant="raised" color="secondary" onClick={this.onGroupCreate}
+                        style={{
+                            position: 'absolute',
+                            top: '200px',
+                            right: '50px'
+                        }}>
                     Create group
                 </Button>
                 {snackbar}

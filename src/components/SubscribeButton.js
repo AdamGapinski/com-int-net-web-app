@@ -13,10 +13,15 @@ const styles = theme => ({
 });
 
 function SubscribeButton(props) {
-    const { classes } = props;
+    const {classes} = props;
     return (
         <div>
-            <Button variant="raised" color="primary" className={classes.button} onClick={props.onSubscribe}>
+            <Button variant="raised" color="primary" className={classes.button} onClick={props.onSubscribe}
+                    style={{
+                        position: 'absolute',
+                        top: '135px',
+                        right: '50px'
+                    }}>
                 Subscribe selected
             </Button>
         </div>

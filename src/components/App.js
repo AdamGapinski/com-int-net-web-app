@@ -32,7 +32,10 @@ const styles = theme => ({
     },
     addPostButton: {
         margin: theme.spacing.unit,
-        zIndex: theme.zIndex.drawer + 1,
+        zIndex: theme.zIndex.drawer + 501,
+        position: 'absolute',
+        bottom: '20px',
+        right: '50px'
     },
     search: {
         width: theme.spacing.unit * 9,

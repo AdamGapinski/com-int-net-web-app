@@ -59,7 +59,6 @@ class PostCard extends React.Component {
 
     fetchLikes = () => {
         this.props.api.fetchLikes(this.props.post, this.props.group).then(fetched => {
-            console.log(fetched);
             this.setState({
                 likes: fetched
             });
