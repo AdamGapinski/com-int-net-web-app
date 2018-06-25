@@ -30,7 +30,7 @@ export default class HomePanel extends React.Component {
         }
     }
 
-    refreshPostList() {
+    refreshPostList = () => {
         this.setState({
             forcePostListRefresh: true
         })
