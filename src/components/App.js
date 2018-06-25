@@ -33,7 +33,7 @@ const styles = theme => ({
     addPostButton: {
         margin: theme.spacing.unit,
         zIndex: theme.zIndex.drawer + 501,
-        position: 'absolute',
+        position: 'fixed',
         bottom: '20px',
         right: '50px'
     },
