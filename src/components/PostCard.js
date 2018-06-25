@@ -58,7 +58,7 @@ class PostCard extends React.Component {
     };
 
     fetchLikes = () => {
-        this.props.api.fetchLikes(this.props.post).then(fetched => {
+        this.props.api.fetchLikes(this.props.post, this.props.group).then(fetched => {
             console.log(fetched);
             this.setState({
                 likes: fetched
@@ -128,7 +128,7 @@ class PostCard extends React.Component {
                     </CardActions>
                     <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <CommentsSection api={this.props.api} post={this.props.post} user={this.props.user}/>
+                            <CommentsSection api={this.props.api} post={this.props.post} user={this.props.user} group={this.props.group}/>
                         </CardContent>
                     </Collapse>
                 </Card>

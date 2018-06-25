@@ -9,10 +9,6 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 export default class Subscription extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     onSubscriptionDelete = () => {
         this.props.onSubscriptionDelete(this.props.subscription);
     };

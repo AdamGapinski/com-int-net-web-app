@@ -134,11 +134,11 @@ export default class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
-    fetchPostsByCategories = (categories) => {
+    fetchPostsByCategories = (categories, group) => {
         if (Array.isArray(categories)) {
+            let groupParam = group === undefined ? "" : `?group_id=${group.id}`;
             let categoryList = categories.join("3");
-            console.log(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`);
-            return fetch(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts`, {
+            return fetch(`${CONFIG.serverUrl}/categories/list/${categoryList}/posts${groupParam}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -148,8 +148,9 @@ export default class Api {
                 .catch(error => console.error('Error:', error));
         }
     };
-    fetchComments = (postId) => {
-        return fetch(`${CONFIG.serverUrl}/posts/${postId}/comments`, {
+    fetchComments = (postId, group) => {
+        let groupParam = group === undefined ? "" : `?group_id=${group.id}`;
+        return fetch(`${CONFIG.serverUrl}/posts/${postId}/comments${groupParam}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -158,8 +159,9 @@ export default class Api {
         }).then(r => r.json())
             .catch(error => console.error('Error:', error));
     };
-    fetchLikes = (post) => {
-        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/likes`, {
+    fetchLikes = (post, group) => {
+        let groupParam = group === undefined ? "" : `?group_id=${group.id}`;
+        return fetch(`${CONFIG.serverUrl}/posts/${post.id}/likes${groupParam}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

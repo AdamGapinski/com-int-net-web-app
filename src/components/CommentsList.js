@@ -13,10 +13,6 @@ const styles = theme => ({
 });
 
 class CommentsList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const comments = [];
         if (this.props.comments && Array.isArray(this.props.comments)) {

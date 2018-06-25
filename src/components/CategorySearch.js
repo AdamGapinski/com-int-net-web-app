@@ -89,17 +89,12 @@ class DownshiftMultiple extends React.Component {
         this.props.onDelete(selectedItem.slice());
     };
 
-    constructor(props) {
-        super(props)
-    }
-
     getSuggestions(inputValue) {
         let count = 0;
         let suggestions = [];
         this.props.suggestions.forEach(s => {
             suggestions.push({label: s})
         });
-        console.log(this.props.suggestions);
         return suggestions.filter(suggestion => {
             const keep =
                 (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&

@@ -3,7 +3,7 @@ import CategorySearch from "./CategorySearch";
 import PostsSheet from "./PostsSheet";
 import AddPostButton from "./AddPostButton";
 
-export default class HomePanel extends React.Component {
+export default class GroupPanel extends React.Component {
     onCategoryAdd = (categories) => {
         this.setState({
             categories: categories,
@@ -79,7 +79,8 @@ export default class HomePanel extends React.Component {
                                 suggestions={this.state.suggestions}/>
                 <PostsSheet api={this.props.api}
                             categories={categories}
-                            user={this.props.user}/>
+                            user={this.props.user}
+                            group={this.props.group}/>
                 <AddPostButton api={this.props.api}
                                classes={this.props.classes}
                                onPostAdd={this.onPostAdd}

@@ -14,7 +14,8 @@ const styles = theme => ({
 function PostsSheet(props) {
     return (
         <div>
-            <PostsList api={props.api} categories={props.categories} user={props.user}/>
+            <PostsList api={props.api}
+                       categories={props.categories} user={props.user} group={props.group}/>
         </div>
     );
 }

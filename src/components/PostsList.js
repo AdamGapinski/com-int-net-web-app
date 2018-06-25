@@ -27,11 +27,11 @@ class PostsList extends React.Component {
     render() {
         if (this.props.categories.length > 0 &&
             !this.equalsWithFetched()) {
-            this.props.api.fetchPostsByCategories(this.props.categories).then(fetched => {
-                console.log(fetched);
+            this.props.api.fetchPostsByCategories(this.props.categories, this.props.group).then(fetched => {
                 if (fetched && Array.isArray(fetched)) {
                     this.setState({
                         posts: fetched.map(post => <PostCard key={post.id} post={post} user={this.props.user}
+                                                             group={this.props.group}
                                                              api={this.props.api}/>),
                         fetchedCategories: this.props.categories.slice(0)
                     });

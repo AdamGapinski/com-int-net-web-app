@@ -10,10 +10,6 @@ import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import GroupsNestedListItem from "./GroupsNestedListItem";
 
 class LeftPanel extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Drawer

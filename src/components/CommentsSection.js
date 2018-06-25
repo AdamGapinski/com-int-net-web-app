@@ -19,7 +19,7 @@ export default class CommentsSection extends React.Component {
     };
 
     fetchComments() {
-        this.props.api.fetchComments(this.props.post.id).then(fetched => {
+        this.props.api.fetchComments(this.props.post.id, this.props.group).then(fetched => {
             this.setState({
                 comments: fetched
             });

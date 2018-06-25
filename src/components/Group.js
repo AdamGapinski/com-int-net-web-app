@@ -8,10 +8,6 @@ import GroupIcon from "@material-ui/icons/Group";
 import RemoveIcon from "@material-ui/icons/Remove";
 
 export default class Group extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     onGroupClick = () => {
         this.props.onGroupClick(this.props.group);
     };

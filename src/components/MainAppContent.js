@@ -39,7 +39,7 @@ export default class MainAppContent extends React.Component {
         if (this.state.active !== 'group') {
             this.setState({
                 active: 'group',
-                name: group.name
+                group: group
             })
         }
     };
@@ -78,6 +78,7 @@ export default class MainAppContent extends React.Component {
                            user={this.props.user}
                            classes={this.props.classes}
                            active={this.state.active}
+                           group={this.state.group}
                            fetchGroups={this.fetchGroups}/>
             </div>
         );

@@ -5,10 +5,6 @@ import red from "@material-ui/core/colors/red";
 import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 
 export default class Comment extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <ListItem style={{paddingLeft: '0px', paddingRight: '0px'}}>
